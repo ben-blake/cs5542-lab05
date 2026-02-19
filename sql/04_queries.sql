@@ -96,12 +96,11 @@ SELECT
     a.criticality,
     a.owner,
     COUNT(DISTINCT v.vuln_id) AS vulnerability_count,
-    ROUND(AVG(v.cvss_score), 2) AS avg_cvss_score,
-    MAX(v.cvss_score) AS max_cvss_score,
+    ROUND(COALESCE(AVG(v.cvss_score), 0), 2) AS avg_cvss_score,
+    COALESCE(MAX(v.cvss_score), 0) AS max_cvss_score,
     COUNT(DISTINCT i.incident_id) AS incident_count,
-    -- Composite risk score: (max_cvss / 10) + (incidents / 100) + (criticality_weight)
     ROUND(
-        (MAX(v.cvss_score) / 10.0) * 0.5 +
+        (COALESCE(MAX(v.cvss_score), 0) / 10.0) * 0.5 +
         (COUNT(DISTINCT i.incident_id) / 100.0) * 0.3 +
         CASE WHEN a.criticality = 'Critical' THEN 20
              WHEN a.criticality = 'High' THEN 15
@@ -115,8 +114,6 @@ LEFT JOIN VULNERABILITIES v ON a.asset_id = v.asset_id
 LEFT JOIN INCIDENTS i ON a.asset_id = i.asset_id
 GROUP BY a.asset_id, a.hostname, a.asset_type, a.criticality, a.owner
 ORDER BY composite_risk_score DESC;
-
-SELECT * FROM ASSET_RISK_SCORES;
 
 -- ============================================================================
 -- EXTENSION 2: Advanced Analytics - Asset Vulnerability Exposure Index
