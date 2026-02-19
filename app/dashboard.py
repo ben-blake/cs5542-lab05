@@ -25,10 +25,11 @@ st.set_page_config(
 
 st.markdown("""
     <style>
-    .stMetric {
+    [data-testid="stMetric"] {
         background-color: #f0f2f6;
-        padding: 10px;
-        border-radius: 5px;
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid #e0e2e6;
     }
     </style>
 """, unsafe_allow_html=True)
