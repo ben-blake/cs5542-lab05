@@ -1,5 +1,7 @@
 # CS 5542 Lab 5 — Snowflake Integration: End-to-End Cloud Data Pipeline
 
+**Live Dashboard:** [ben-blake-cs5542-lab05-appdashboard-a2vbg0.streamlit.app](https://ben-blake-cs5542-lab05-appdashboard-a2vbg0.streamlit.app/)
+
 ## System Workflow
 
 This project implements a **production-style cloud data pipeline** integrating cybersecurity data with Snowflake, demonstrating the full ETL workflow:
@@ -14,7 +16,7 @@ CSV Data Files → Snowflake Staging → Tables → SQL Analytics → Streamlit 
 
 ---
 
-## Setup Instructions
+## Local Setup Instructions
 
 ### Prerequisites
 - **Snowflake Account** (free tier eligible)
