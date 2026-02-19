@@ -4,7 +4,7 @@
 This document outlines the responsibilities and technical contributions of each team member for the Snowflake Integration project.
 
 **Team Size:** 2 members
-**Extensions Required:** 2 (per lab requirements for 1-2 member teams)
+**Extensions:** 2 (per lab requirements for 2 member teams)
 **Total Contribution:** 1,150+ rows of data loaded, 4 analytics queries, 2 extensions, production-ready dashboard
 
 ---
@@ -147,11 +147,17 @@ This document outlines the responsibilities and technical contributions of each 
 ### Commits & Pull Requests
 - **Ben Blake:**
   - Commits: generate_data.py, sql/01_setup.sql, sql/02_schema.sql, scripts/ingest.py
-  - [Link to pull request/commits if applicable]
+  - [generate_data.py](https://github.com/ben-blake/cs5542-lab05/commit/40d0f4fb6ef34e9b68372421233192f332d3696b)
+  - [scripts/ingest.py](https://github.com/ben-blake/cs5542-lab05/commit/40d0f4fb6ef34e9b68372421233192f332d3696b)
+  - [sql/01_setup.sql](https://github.com/ben-blake/cs5542-lab05/commit/344cdaf5e51ab4d1cac044a63cd79c8c100298df)
+  - [sql/02_schema.sql](https://github.com/ben-blake/cs5542-lab05/commit/344cdaf5e51ab4d1cac044a63cd79c8c100298df)
 
 - **Tina Nguyen:**
   - Commits: app/dashboard.py, sql/04_queries.sql, README.md, CONTRIBUTIONS.md
-  - [Link to pull request/commits if applicable]
+  - [sql/04_queries.sql](https://github.com/ben-blake/cs5542-lab05/commit/dc536ca41b72693d0a816196b0f360251e1d9bfe)
+  - [CONTRIBUTIONS.md](https://github.com/ben-blake/cs5542-lab05/commit/86691fae903f277b14e733d6be80ecfe3988f7eb)
+  - [app/dashboard.py](https://github.com/ben-blake/cs5542-lab05/commit/cd97703332cf5ddaa2704cd230a74fa5ad324483)
+  - [README.md](https://github.com/ben-blake/cs5542-lab05/commit/8d70dac207dcaecfc597ab0724015cbfb5a3126a)
 
 ### Code Quality & Testing
 - Both members:
@@ -183,20 +189,20 @@ This document outlines the responsibilities and technical contributions of each 
 ## Technical Reflection
 
 ### Ben Blake Reflection
-[Describe your technical experience, challenges overcome, and key learnings]
 
-*Example topics to address:*
-- How did working with Snowflake change your perspective on data warehousing?
-- What was the most challenging part of the data pipeline?
-- How would you optimize this system for production scale?
+Working with Snowflake shifted my understanding of data warehousing from traditional on-prem setups to a fully managed, elastic model. The separation of storage and compute was eye-opening — being able to spin up `CYBER_WH` on demand and auto-suspend it when idle made cost management intuitive compared to always-on database servers.
+
+The most challenging part was getting the ingestion pipeline reliable. Handling Snowflake authentication with key-pair auth instead of passwords required working through PEM encoding, DER serialization, and debugging cryptography library behavior. Staging CSV files with `PUT` and loading via `COPY INTO` also required careful attention to file format options — mismatched delimiters or header settings caused silent partial loads that were hard to catch without row count verification.
+
+For production scale, I would add clustering keys on high-cardinality columns like `asset_id` in the VULNERABILITIES table, implement Snowflake Streams for change data capture instead of full reloads, and move the pipeline orchestration to something like Airflow or Prefect for scheduling and retry logic.
 
 ### Tina Nguyen Reflection
-[Describe your technical experience, challenges overcome, and key learnings]
 
-*Example topics to address:*
-- How did building the Streamlit dashboard help you understand data visualization?
-- What Snowflake SQL features were most useful for your queries?
-- How would you enhance the dashboard for real-world users?
+Building the Streamlit dashboard reinforced how much data visualization depends on query design. Writing SQL that returned clean, aggregation-ready results made the Plotly charts straightforward — but poorly structured queries meant fighting with pandas transformations on the frontend. Designing the views in Snowflake first (like `NIST_COMPLIANCE_SUMMARY`) and then querying them from the dashboard kept the app code clean.
+
+The most useful Snowflake SQL features were `CASE` expressions for conditional aggregation (counting critical vs. high severity inline), `DATE_TRUNC` for time-based grouping, and `LISTAGG` for collapsing incident types into readable strings in the kill chain view. These let me build rich summaries in a single query rather than pulling raw data and processing it in Python.
+
+To enhance the dashboard for real-world users, I would add role-based filtering so analysts only see assets they own, implement drill-down navigation (clicking a bar chart element filters the table below it), and add export buttons for CSV/PDF reports. Caching with `@st.cache_resource` helped connection reuse, but query-level caching with TTLs would further reduce latency for repeated filter combinations.
 
 ---
 
@@ -235,7 +241,7 @@ This document outlines the responsibilities and technical contributions of each 
 
 ---
 
-**Submission Date:** [Date]
+**Submission Date:** February 19, 2026
 **Lab Deadline:** February 23, 2026
-**Team Contact:** ben.blake@umkc.edu
+**Team Contact:** ben.blake@umkc.edu & qpnh58@umkc.edu
 
