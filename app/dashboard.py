@@ -220,6 +220,7 @@ with tab1:
             y='MAX_CVSS_SCORE',
             color='MAX_CVSS_SCORE',
             color_continuous_scale='YlOrRd',
+            range_color=[0, 10],
             title="Maximum CVSS Score by Asset",
             labels={'MAX_CVSS_SCORE': 'CVSS Score', 'HOSTNAME': 'Hostname'}
         )
