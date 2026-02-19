@@ -26,10 +26,16 @@ st.set_page_config(
 st.markdown("""
     <style>
     [data-testid="stMetric"] {
-        background-color: #f0f2f6;
+        background-color: #1e1e2f;
         padding: 15px;
         border-radius: 8px;
-        border: 1px solid #e0e2e6;
+        border: 1px solid #3a3a5c;
+    }
+    [data-testid="stMetric"] label {
+        color: #a0a0b8 !important;
+    }
+    [data-testid="stMetric"] [data-testid="stMetricValue"] {
+        color: #ffffff !important;
     }
     </style>
 """, unsafe_allow_html=True)
