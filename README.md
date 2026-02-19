@@ -2,6 +2,8 @@
 
 **Live Dashboard:** [ben-blake-cs5542-lab05-appdashboard-a2vbg0.streamlit.app](https://ben-blake-cs5542-lab05-appdashboard-a2vbg0.streamlit.app/)
 
+**Demo Video:** [https://vimeo.com/1166437253](https://vimeo.com/1166437253)
+
 ## System Workflow
 
 This project implements a **production-style cloud data pipeline** integrating cybersecurity data with Snowflake, demonstrating the full ETL workflow:
@@ -263,7 +265,7 @@ Advanced Persistent Threat (APT) and criminal group profiles.
 
 ## Team-Scaled Extensions
 
-### Teams with 1–2 members: 2 extensions (✓ Implemented)
+### Team with 2 members: 2 extensions (✓ Implemented)
 
 #### Extension 1: Asset Risk Scoring — Dynamic Materialized View
 **File:** `sql/04_queries.sql` (ASSET_RISK_SCORES)
@@ -346,17 +348,6 @@ streamlit run app/dashboard.py
 cat pipeline_logs.csv
 # Should have entries for each data load operation
 ```
-
----
-
-## Demo Video
-
-**Note:** Demo video (3-5 min) should include:
-1. Data generation script running
-2. Snowflake UI showing tables and data
-3. Streamlit dashboard walkthrough (all 5 tabs)
-4. Pipeline logs showing latencies
-5. Explanation of extensions (risk scoring view + parameterized dashboard)
 
 ---
 
